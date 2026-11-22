@@ -1,0 +1,41 @@
+name: Actualizacion Matutina Serverless Garmin Studio
+
+on:
+  schedule:
+    # 07:30 UTC = 08:30 Hora Peninsular Española (CET)
+    - cron: '30 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Descargar datos de Garmin Connect y regenerar Dashboard
+        env:
+          GARMIN_EMAIL: ${{ secrets.GARMIN_EMAIL }}
+          GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
+          GARMIN_TOKENS_BASE64: ${{ secrets.GARMIN_TOKENS_BASE64 }}
+          TIMEZONE: Europe/Madrid
+        run: node src/update-dashboard.js --cloud
+
+      - name: Publicar index.html actualizado en GitHub Pages
+        run: |
+          git config user.name "Garmin Studio Bot"
+          git config user.email "actions@github.com"
+          git add index.html dashboard.html
+          git diff --staged --quiet || git commit -m "Actualización automática matutina Dashboard Garmin ($(date +'%Y-%m-%d %H:%M'))"
+          git push
