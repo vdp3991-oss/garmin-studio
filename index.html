@@ -7,7 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <script>
-    // Si se abre fuera de Antigravity (ej. marcador de Chrome/Edge), aplica colores oscuros tipo Looker Studio
     if (!getComputedStyle(document.documentElement).getPropertyValue('--background').trim()) {
       const s = document.documentElement.style;
       s.setProperty('--background', '#0f172a');
@@ -26,7 +25,6 @@
 </head>
 <body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 md:p-6 m-0 space-y-6">
 
-  <!-- Top Header Bar (Looker Studio Style) -->
   <header class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
     <div class="space-y-1">
       <div class="flex items-center gap-2">
@@ -34,18 +32,17 @@
           GARMIN FENIX 7 STUDIO
         </span>
         <span class="text-xs text-[var(--muted-foreground)] font-mono">
-          Actualizado: 22 Nov 2026 · Informe Matutino
+          Actualizado: 2026-11-22 · Informe Matutino Automático
         </span>
       </div>
       <h1 class="text-lg md:text-xl font-bold tracking-tight">
         Panel Diario: Reto Teide 0-4-0 (7 Mar) &amp; Calma / Sistema Nervioso
       </h1>
       <p class="text-xs text-[var(--muted-foreground)]">
-        Cierre completo de ayer (Sáb 21 Nov) + Recuperación nocturna de hoy (Dom 22 Nov)
+        Cierre completo de ayer (2026-11-21) + Recuperación nocturna de hoy (2026-11-22)
       </p>
     </div>
 
-    <!-- Interactive View Selector -->
     <div class="flex flex-wrap items-center gap-1.5 bg-[var(--background)] p-1 rounded-lg border border-[var(--card-border)] text-xs">
       <button onclick="switchTab('overview')" id="tab-overview" class="px-3 py-1.5 rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)] transition">
         Resumen Matutino IA
@@ -62,9 +59,7 @@
     </div>
   </header>
 
-  <!-- Executive KPI Cards Row (Yesterday vs Today Morning Recovery) -->
   <section class="grid grid-cols-2 lg:grid-cols-5 gap-3">
-    <!-- KPI 1: Body Battery -->
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5">
       <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
         <span>Body Battery (Hoy)</span>
@@ -78,65 +73,61 @@
         <div class="h-full bg-[var(--success)] rounded-full" style="width: 100%"></div>
       </div>
       <p class="text-xs text-[var(--muted-foreground)]">
-        Ayer: máx 18 → mín 5 (agotamiento)
+        Ayer: máx 18 → mín 5
       </p>
     </div>
 
-    <!-- KPI 2: Sleep Score -->
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5">
       <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
         <span>Sueño de Anoche</span>
-        <span class="font-mono text-[var(--success)] font-semibold">100/100</span>
+        <span class="font-mono text-[var(--success)] font-semibold">Score: 100</span>
       </div>
       <div class="flex items-baseline gap-2">
         <span class="text-2xl font-bold font-mono tabular-nums">9h 11m</span>
         <span class="text-xs text-[var(--muted-foreground)]">vs 3h 09m ant.</span>
       </div>
       <div class="flex gap-1 text-xs text-[var(--muted-foreground)] font-mono">
-        <span>Prof: 2h13m</span> · <span>REM: 2h27m</span>
+        <span>Prof: 2h 13m</span> · <span>REM: 2h 27m</span>
       </div>
       <p class="text-xs text-[var(--success)]">
-        🟢 Meta &gt; 7h30m superada
+        🟢 Meta > 75 superada
       </p>
     </div>
 
-    <!-- KPI 3: HRV / VFC & RHR -->
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5">
       <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
         <span>VFC (HRV) &amp; FC Reposo</span>
-        <span class="font-mono text-[var(--success)] font-semibold">EQUILIBRADO</span>
+        <span class="font-mono text-[var(--success)] font-semibold">BALANCED</span>
       </div>
       <div class="flex items-baseline gap-2">
         <span class="text-2xl font-bold font-mono tabular-nums">87 ms</span>
         <span class="text-xs text-[var(--muted-foreground)]">49 ppm RHR</span>
       </div>
       <p class="text-xs text-[var(--muted-foreground)]">
-        Ayer: 38 ms VFC · 56 ppm (-7 ppm hoy)
+        Ayer: 38 ms · Media 7d: 72 ms
       </p>
       <p class="text-xs text-[var(--success)]">
-        🟢 Rebote parasimpático total
+        Variación RHR: -7 ppm
       </p>
     </div>
 
-    <!-- KPI 4: Meditation & Stress (Yesterday) -->
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5">
       <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
         <span>Meditación &amp; Estrés (Ayer)</span>
         <span class="font-mono text-[var(--warning)] font-semibold">Estrés: 43</span>
       </div>
       <div class="flex items-baseline gap-2">
-        <span class="text-2xl font-bold font-mono tabular-nums">10,1 min</span>
-        <span class="text-xs text-[var(--muted-foreground)]">72 ppm · 15,8 rpm</span>
+        <span class="text-2xl font-bold font-mono tabular-nums">10.1 min</span>
+        <span class="text-xs text-[var(--muted-foreground)]">3d / 14d</span>
       </div>
       <p class="text-xs text-[var(--muted-foreground)]">
-        Estrés sesión: 32 → 32 (Δ 0, estable)
+        Última: 32 → 32 (Δ 0)
       </p>
       <p class="text-xs text-[var(--success)]">
-        🟢 Frenó la subida tras Fuerza
+        Meta: 5–7 días/semana (10–15m)
       </p>
     </div>
 
-    <!-- KPI 5: Teide Countdown & Yesterday Activity -->
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5 col-span-2 lg:col-span-1">
       <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
         <span>Reto Teide 0-4-0</span>
@@ -144,20 +135,19 @@
       </div>
       <div class="flex items-baseline gap-2">
         <span class="text-2xl font-bold font-mono tabular-nums">16.131</span>
-        <span class="text-xs text-[var(--muted-foreground)]">pasos ayer (+31 pisos)</span>
+        <span class="text-xs text-[var(--muted-foreground)]">pasos ayer (+32 pisos)</span>
       </div>
       <p class="text-xs text-[var(--muted-foreground)]">
-        Ayer: Fuerza (9,4m) · 2.485 kcal
+        Ayer: 2485 kcal (560 act)
       </p>
       <p class="text-xs text-[var(--warning)]">
-        🟡 Desnivel 14d: +502m (subir en Fase 1)
+        Desnivel 14d: +498 m
       </p>
     </div>
   </section>
 
-  <!-- ==================== TAB 1: RESUMEN MATUTINO IA ==================== -->
+  <!-- TAB 1: OVERVIEW -->
   <div id="panel-overview" class="space-y-6">
-    <!-- AI Morning Briefing Card -->
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-[var(--card-border)]">
         <div>
@@ -165,117 +155,64 @@
             🧠 Interpretación Matutina del Coach IA (Balance de Ayer + Sueño de Hoy)
           </h2>
           <p class="text-xs text-[var(--muted-foreground)]">
-            Evaluación cruzada de tus actividades del sábado 21 Nov y cómo las ha asimilado tu cuerpo esta noche
+            Evaluación cruzada de tus actividades del 2026-11-21 y cómo las ha asimilado tu cuerpo esta noche (2026-11-22)
           </p>
         </div>
         <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--background)] border border-[var(--card-border)]">
-          Estado Hoy: 🟢 Óptimo para Montaña / Zona 2
+          Estado Hoy: 🟢 Óptimo para Montaña / Zona 2 o Fuerza
         </span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs leading-relaxed">
-        <!-- Box 1: What happened yesterday -->
         <div class="bg-[var(--background)] border border-[var(--card-border)] rounded-lg p-3.5 space-y-2">
           <div class="font-semibold text-sm flex items-center justify-between">
-            <span>1. El Día de Ayer (Sáb 21 Nov)</span>
-            <span class="font-mono text-xs text-[var(--warning)]">Carga Alta de Pasos</span>
+            <span>1. El Día de Ayer (2026-11-21)</span>
+            <span class="font-mono text-xs text-[var(--primary)]">16.131 pasos</span>
           </div>
           <p class="text-[var(--muted-foreground)]">
-            Afrontaste el sábado con la batería muy baja (venías de dormir solo <strong>3h 09m</strong> con VFC en <strong>38 ms</strong> y Body Battery máxima de <strong>18</strong>). Pese a ello, tuviste un día muy activo de movimiento base (<strong>16.131 pasos</strong> y <strong>31,6 pisos</strong> subidos, excelente como resistencia invisible para el Teide).
+            <strong>Deporte:</strong> Fuerza (9.4 min, FC media 107 ppm). Acumulaste <strong>16.131 pasos</strong> y <strong>32 pisos</strong> subidos (560 kcal activas / 2485 kcal totales).
           </p>
           <p class="text-[var(--muted-foreground)]">
-            Por la tarde-noche hiciste la combinación ideal: <strong>9,4 min de Fuerza (20:19)</strong> seguidos de <strong>10,1 min de Meditación (20:41)</strong>. Esa meditación bajó tu pulso de 150 ppm a <strong>72 ppm</strong> y evitó que el estrés subiera antes de irte a la cama.
+            <strong>Meditación y Calma:</strong> 10.1 min a 72 ppm (estrés 32 → 32, Δ 0). El estrés medio del día cerró en <strong>43/100</strong> con una Body Battery que osciló entre 18 y 5.
           </p>
         </div>
 
-        <!-- Box 2: Overnight physiological response -->
         <div class="bg-[var(--background)] border border-[var(--card-border)] rounded-lg p-3.5 space-y-2">
           <div class="font-semibold text-sm flex items-center justify-between">
-            <span>2. Respuesta Nocturna (Dom 22 Nov)</span>
-            <span class="font-mono text-xs text-[var(--success)]">Sleep Score 100</span>
+            <span>2. Respuesta Nocturna (2026-11-22)</span>
+            <span class="font-mono text-xs text-[var(--success)]">Score 100</span>
           </div>
           <p class="text-[var(--muted-foreground)]">
-            La meditación de las 20:41 preparó una recuperación extraordinaria: has dormido <strong>9h 11m</strong> con una puntuación perfecta de <strong>100/100</strong> (<strong>2h 13m</strong> de sueño profundo y <strong>2h 27m</strong> de sueño REM, apenas 1 minuto despierto).
+            Has dormido <strong>9h 11m</strong> (Puntuación: <strong>100/100</strong>), con <strong>2h 13m</strong> de sueño profundo y <strong>2h 27m</strong> de sueño REM.
           </p>
           <p class="text-[var(--muted-foreground)]">
-            Tu sistema nervioso parasimpático ha dado un giro radical: tu <strong>VFC (HRV)</strong> ha saltado de 38 ms a <strong>87 ms</strong> (superando tu media semanal de 72 ms) y tu <strong>FC en reposo ha caído 7 pulsaciones</strong> (de 56 a <strong>49 ppm</strong>), recargando tu Body Battery hasta el <strong>100%</strong>.
+            Tu <strong>VFC (HRV)</strong> nocturna ha marcado <strong>87 ms</strong> (media semanal: 72 ms) y tu frecuencia cardíaca en reposo está en <strong>49 ppm</strong>, recargando tu Body Battery en <strong>+95 puntos</strong> hasta <strong>100</strong>.
           </p>
         </div>
 
-        <!-- Box 3: Actionable recommendation for Today -->
         <div class="bg-[var(--background)] border border-[var(--card-border)] rounded-lg p-3.5 space-y-2">
           <div class="font-semibold text-sm flex items-center justify-between">
             <span>3. Plan Recomendado para Hoy</span>
-            <span class="font-mono text-xs text-[var(--primary)]">Acción Diaria</span>
+            <span class="font-mono text-xs text-[var(--primary)]">Faltan 105d Teide</span>
           </div>
           <ul class="space-y-1.5 text-[var(--muted-foreground)] list-disc pl-4">
             <li>
-              <strong>Montaña / Teide:</strong> Con Body Battery al 100% y VFC en 87 ms, hoy domingo es el día ideal para una <strong>ruta de senderismo en Zona 2 (105–135 ppm)</strong> buscando sumar entre <strong>+400 m y +600 m de desnivel</strong> (caminata continua y disfrute en naturaleza).
+              <strong>Objetivo Teide (7 Mar):</strong> Con tu nivel alto de energía hoy, es un día excelente para sumar desnivel en Zona 2 (105–135 ppm) o realizar sesión de Fuerza/Escalada.
             </li>
             <li>
-              <strong>Meditación y Calma:</strong> Repite la fórmula ganadora de ayer: <strong>10–15 min de meditación entre las 20:00 y las 21:30</strong> para consolidar tu racha de días consecutivos meditando.
+              <strong>Objetivo Calma:</strong> Reserva <strong>10–15 minutos entre las 20:00 y las 21:30</strong> (idealmente tras soltar tensión física) para tu sesión diaria de meditación.
             </li>
           </ul>
         </div>
       </div>
-
-      <!-- Goal Traffic Light Table -->
-      <div class="pt-2">
-        <h3 class="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)] mb-2.5">
-          🎯 Semáforo de Evolución frente a tus Objetivos
-        </h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
-          <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--background)] flex flex-col justify-between gap-1">
-            <div class="flex items-center justify-between font-semibold">
-              <span>🏔️ Desnivel &amp; Base Teide</span>
-              <span>🟡 En Progreso</span>
-            </div>
-            <p class="text-[var(--muted-foreground)]">
-              +502 m en 14 días (2 rutas) y gran base de pasos (16k ayer). Objetivo esta semana: sumar 1–2 salidas con +500–800 m.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--background)] flex flex-col justify-between gap-1">
-            <div class="flex items-center justify-between font-semibold">
-              <span>💪 Fuerza &amp; Escalada</span>
-              <span>🟢 En Objetivo</span>
-            </div>
-            <p class="text-[var(--muted-foreground)]">
-              5 sesiones de Fuerza + 2 de Escalada en 14 días. Constancia excelente; mantén foco en tren inferior y core.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--background)] flex flex-col justify-between gap-1">
-            <div class="flex items-center justify-between font-semibold">
-              <span>🧘‍♂️ Meditación &amp; Calma</span>
-              <span>🟡 Subiendo Racha</span>
-            </div>
-            <p class="text-[var(--muted-foreground)]">
-              Gran mejora cualitativa ayer (Δ estrés = 0 tras Fuerza). Reto de esta semana: pasar de 3 días/14d a 5+ días meditando.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--background)] flex flex-col justify-between gap-1">
-            <div class="flex items-center justify-between font-semibold">
-              <span>🔋 Descanso &amp; VFC</span>
-              <span>🟢 Recuperado</span>
-            </div>
-            <p class="text-[var(--muted-foreground)]">
-              Noche perfecta (9h 11m, Score 100, VFC 87 ms, RHR 49 ppm). Compensada por completo la deuda de sueño del viernes.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- Two Charts Side by Side: Yesterday vs Today Recovery & Stress Distribution -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <!-- Chart 1: Stress Breakdown Yesterday vs Today -->
       <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 space-y-3">
         <div class="flex items-center justify-between">
           <div>
-            <h3 class="text-sm font-bold">Distribución del Estrés y Descanso (Ayer Sáb 21 Nov)</h3>
-            <p class="text-xs text-[var(--muted-foreground)]">Minutos en cada zona fisiológica (Total registrado: 18,5 h)</p>
+            <h3 class="text-sm font-bold">Distribución del Estrés y Descanso (Ayer 2026-11-21)</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">Tiempo en cada zona fisiológica del Fenix 7</p>
           </div>
           <span class="text-xs font-mono font-semibold">Media: 43 / 100</span>
         </div>
@@ -284,160 +221,142 @@
           <div>
             <div class="flex justify-between mb-1">
               <span>Descanso / Recuperación (&lt; 25)</span>
-              <span class="font-mono">283 min (4h 43m · 25%)</span>
+              <span class="font-mono">283 min (25.4%)</span>
             </div>
             <div class="w-full h-2.5 bg-[var(--background)] rounded-full overflow-hidden">
               <div class="h-full rounded-full" style="width: 25.4%; background: var(--success)"></div>
             </div>
           </div>
-
           <div>
             <div class="flex justify-between mb-1">
               <span>Estrés Bajo (26 – 50)</span>
-              <span class="font-mono">418 min (6h 58m · 38%)</span>
+              <span class="font-mono">418 min (37.6%)</span>
             </div>
             <div class="w-full h-2.5 bg-[var(--background)] rounded-full overflow-hidden">
               <div class="h-full rounded-full" style="width: 37.6%; background: var(--primary)"></div>
             </div>
           </div>
-
           <div>
             <div class="flex justify-between mb-1">
               <span>Estrés Medio (51 – 75)</span>
-              <span class="font-mono">320 min (5h 20m · 29%)</span>
+              <span class="font-mono">320 min (28.8%)</span>
             </div>
             <div class="w-full h-2.5 bg-[var(--background)] rounded-full overflow-hidden">
               <div class="h-full rounded-full" style="width: 28.8%; background: var(--warning)"></div>
             </div>
           </div>
-
           <div>
             <div class="flex justify-between mb-1">
               <span>Estrés Alto (76 – 100)</span>
-              <span class="font-mono">91 min (1h 31m · 8%)</span>
+              <span class="font-mono">91 min (8.2%)</span>
             </div>
             <div class="w-full h-2.5 bg-[var(--background)] rounded-full overflow-hidden">
               <div class="h-full rounded-full" style="width: 8.2%; background: var(--error)"></div>
             </div>
           </div>
         </div>
-
-        <p class="text-xs text-[var(--muted-foreground)] pt-1 border-t border-[var(--card-border)]">
-          💡 <strong>Lectura clínica:</strong> El estrés medio de 43 ayer fue consecuencia directa de haber dormido solo 3h 09m la noche previa. Aun así, lograste casi 12 horas entre descanso y estrés bajo.
-        </p>
       </div>
 
-      <!-- Chart 2: Sleep Architecture Comparison (Friday Night vs Saturday Night) -->
       <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 space-y-3">
         <div class="flex items-center justify-between">
           <div>
-            <h3 class="text-sm font-bold">Comparativa de Arquitectura del Sueño y Sistema Nervioso</h3>
-            <p class="text-xs text-[var(--muted-foreground)]">Impacto de la rutina Fuerza + Meditación del sábado noche</p>
+            <h3 class="text-sm font-bold">Comparativa de Sueño y Recuperación Autonómica</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">Noche anterior (2026-11-21) vs Anoche (2026-11-22)</p>
           </div>
-          <span class="text-xs font-mono text-[var(--success)] font-semibold">+75 pts Score</span>
         </div>
 
         <div class="grid grid-cols-2 gap-3 pt-1 text-xs">
           <div class="p-3 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
             <div class="flex items-center justify-between font-semibold text-[var(--muted-foreground)]">
-              <span>Noche Vie → Sáb (21 Nov)</span>
-              <span class="text-[var(--error)] font-mono">Score 25</span>
+              <span>Noche 2026-11-21</span>
+              <span class="font-mono">Score 25</span>
             </div>
             <div class="space-y-1 font-mono text-xs">
               <div class="flex justify-between"><span>Tiempo total:</span><strong>3h 09m</strong></div>
               <div class="flex justify-between"><span>Sueño Profundo:</span><span>48 min</span></div>
               <div class="flex justify-between"><span>Sueño REM:</span><span>0 min</span></div>
-              <div class="flex justify-between"><span>Despierto:</span><span class="text-[var(--error)]">96 min</span></div>
-              <div class="flex justify-between"><span>VFC Nocturna:</span><span class="text-[var(--warning)]">38 ms</span></div>
+              <div class="flex justify-between"><span>Despierto:</span><span>96 min</span></div>
+              <div class="flex justify-between"><span>VFC Nocturna:</span><span>38 ms</span></div>
               <div class="flex justify-between"><span>Recarga Battery:</span><span>+13 pts</span></div>
             </div>
           </div>
 
           <div class="p-3 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
             <div class="flex items-center justify-between font-semibold">
-              <span>Noche Sáb → Dom (22 Nov)</span>
+              <span>Anoche (2026-11-22)</span>
               <span class="text-[var(--success)] font-mono">Score 100</span>
             </div>
             <div class="space-y-1 font-mono text-xs">
               <div class="flex justify-between"><span>Tiempo total:</span><strong class="text-[var(--success)]">9h 11m</strong></div>
-              <div class="flex justify-between"><span>Sueño Profundo:</span><span class="text-[var(--success)]">133 min</span></div>
-              <div class="flex justify-between"><span>Sueño REM:</span><span class="text-[var(--success)]">147 min</span></div>
-              <div class="flex justify-between"><span>Despierto:</span><span class="text-[var(--success)]">1 min</span></div>
+              <div class="flex justify-between"><span>Sueño Profundo:</span><span>133 min</span></div>
+              <div class="flex justify-between"><span>Sueño REM:</span><span>147 min</span></div>
+              <div class="flex justify-between"><span>Despierto:</span><span>1 min</span></div>
               <div class="flex justify-between"><span>VFC Nocturna:</span><span class="text-[var(--success)]">87 ms</span></div>
               <div class="flex justify-between"><span>Recarga Battery:</span><span class="text-[var(--success)]">+95 pts</span></div>
             </div>
           </div>
         </div>
-
-        <p class="text-xs text-[var(--muted-foreground)] pt-1 border-t border-[var(--card-border)]">
-          💡 <strong>Lectura clínica:</strong> Pasar de 0 min a <strong>2h 27m de sueño REM</strong> esta noche es fundamental para el procesamiento emocional del duelo y la reducción de la reactividad a la ansiedad.
-        </p>
       </div>
     </div>
   </div>
 
-  <!-- ==================== TAB 2: RETO TEIDE (7 MARZO) ==================== -->
+  <!-- TAB 2: TEIDE -->
   <div id="panel-teide" class="hidden space-y-6">
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-[var(--card-border)]">
         <div>
-          <h2 class="text-base font-bold">🏔️ Hoja de Ruta Teide 0-4-0 (Playa del Socorro → Refugio · 7 de Marzo)</h2>
+          <h2 class="text-base font-bold">🏔️ Hoja de Ruta Teide 0-4-0 (Nivel del Mar → Refugio · 7 de Marzo)</h2>
           <p class="text-xs text-[var(--muted-foreground)]">
-            Salida 02:00 AM desde nivel del mar · Meta: +3.300 m a +3.700 m de desnivel positivo en una jornada
+            Salida 02:00 AM · Meta: +3.300 m a +3.700 m de desnivel positivo · Faltan 105 días
           </p>
         </div>
-        <span class="px-3 py-1 text-xs font-mono font-semibold rounded-full bg-[var(--background)] border border-[var(--card-border)]">
-          Fase 1 (Nov–Dic): Construcción de Base Aeróbica
-        </span>
       </div>
 
-      <!-- Phase Progression Bars -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
         <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
           <div class="flex justify-between font-semibold">
-            <span>Desnivel Semanal (Meta Fase 1: 700 m)</span>
-            <span class="font-mono">502 m / 14d</span>
+            <span>Desnivel Acumulado (Últimos 14 días)</span>
+            <span class="font-mono">+498 m</span>
           </div>
           <div class="w-full h-2.5 bg-[var(--card)] rounded-full overflow-hidden">
-            <div class="h-full bg-[var(--warning)] rounded-full" style="width: 55%"></div>
+            <div class="h-full bg-[var(--warning)] rounded-full" style="width: 42%"></div>
           </div>
           <p class="text-[var(--muted-foreground)]">
-            Rutas recientes: <strong>Beas de Granada (+297 m)</strong> y <strong>Huétor de Santillán (+197 m)</strong>. Pulso medio de 97–101 ppm (tienes un motor aeróbico muy eficiente en subida suave).
+            Salidas de montaña/senderismo en 14 días: <strong>4 sesiones</strong>. Meta Fase 1 (Nov–Dic): 500–900 m semanales en Zona 2.
           </p>
         </div>
 
         <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
           <div class="flex justify-between font-semibold">
-            <span>Fuerza + Escalada (Meta: 3–4 ses/sem)</span>
-            <span class="font-mono text-[var(--success)]">7 ses / 14d (100%)</span>
+            <span>Fuerza + Escalada (14 días)</span>
+            <span class="font-mono text-[var(--success)]">7 sesiones</span>
           </div>
           <div class="w-full h-2.5 bg-[var(--card)] rounded-full overflow-hidden">
             <div class="h-full bg-[var(--success)] rounded-full" style="width: 100%"></div>
           </div>
           <p class="text-[var(--muted-foreground)]">
-            5 sesiones de Fuerza + 2 de Escalada en 2 semanas. Las sesiones de Escalada (carga ~44,5) te aportan el estímulo anaeróbico y de core más potente.
+            Blindaje muscular y articular para soportar horas de subida y bajada con mochila.
           </p>
         </div>
 
         <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
           <div class="flex justify-between font-semibold">
-            <span>Volumen en Movimiento (14 días)</span>
-            <span class="font-mono">7h 00m deporte</span>
+            <span>Tiempo Deportivo Total (14 días)</span>
+            <span class="font-mono">6h 60m</span>
           </div>
           <div class="w-full h-2.5 bg-[var(--card)] rounded-full overflow-hidden">
-            <div class="h-full bg-[var(--primary)] rounded-full" style="width: 78%"></div>
+            <div class="h-full bg-[var(--primary)] rounded-full" style="width: 80%"></div>
           </div>
           <p class="text-[var(--muted-foreground)]">
-            419,5 min deportivos + días de 16.131 pasos y 31 pisos. Para enero-febrero iremos alargando la tirada de senderismo del fin de semana hacia 4–6 horas continuas.
+            9 entrenamientos registrados y 10.98 km acumulados.
           </p>
         </div>
       </div>
 
-      <!-- Training Load Canvas Chart -->
       <div class="pt-2 space-y-2">
         <div class="flex items-center justify-between text-xs">
-          <span class="font-semibold">Carga de Entrenamiento (Training Load) y Duración por Sesión Deportiva (Últimos 14 días)</span>
-          <span class="text-[var(--muted-foreground)]">Azul: Duración (min) · Verde: Training Load Garmin</span>
+          <span class="font-semibold">Duración (min) y Training Load por Sesión Deportiva (Últimos 14 días)</span>
+          <span class="text-[var(--muted-foreground)]">Azul: Duración (min) · Verde: Training Load</span>
         </div>
         <div class="w-full bg-[var(--background)] border border-[var(--card-border)] rounded-lg p-3">
           <canvas id="teideChart" height="190" class="w-full"></canvas>
@@ -446,105 +365,89 @@
     </div>
   </div>
 
-  <!-- ==================== TAB 3: MEDITACIÓN & VFC ==================== -->
+  <!-- TAB 3: MEDITACION & VFC -->
   <div id="panel-calm" class="hidden space-y-6">
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-[var(--card-border)]">
         <div>
           <h2 class="text-base font-bold">🧘‍♂️ Laboratorio de Meditación, Calma y Regulación Emocional</h2>
           <p class="text-xs text-[var(--muted-foreground)]">
-            Evolución de tus 4 sesiones registradas en los últimos 14 días: qué hace que tu estrés baje o suba al meditar
+            4 sesiones (50.1 min) en los últimos 14 días
           </p>
         </div>
-        <span class="px-3 py-1 text-xs font-mono font-semibold rounded-full bg-[var(--background)] border border-[var(--card-border)]">
-          Hallazgo Clave: Meditar post-Fuerza estabiliza tu sistema nervioso
-        </span>
       </div>
 
-      <!-- Meditation Sessions Comparison Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
-          <div class="flex justify-between items-center font-semibold">
-            <span>9 Nov · 20:04</span>
-            <span class="font-mono text-[var(--warning)]">Δ +5 estrés</span>
-          </div>
-          <div class="font-mono text-xs text-[var(--muted-foreground)]">
-            10,0 min · 81 ppm · 14,6 rpm
-          </div>
-          <div class="text-xs">
-            Estrés: <strong>72 → 77</strong> (Media 76)
-          </div>
-          <p class="text-[var(--muted-foreground)]">
-            Empezaste con estrés alto (72); la respiración bajó a 9 rpm mín, pero el sistema simpático seguía activado.
-          </p>
-        </div>
-
-        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
-          <div class="flex justify-between items-center font-semibold">
-            <span>18 Nov · 06:41 (Mañana)</span>
-            <span class="font-mono text-[var(--error)]">Δ +40 estrés</span>
-          </div>
-          <div class="font-mono text-xs text-[var(--muted-foreground)]">
-            15,0 min · 75 ppm · 13,0 rpm
-          </div>
-          <div class="text-xs">
-            Estrés: <strong>26 → 66</strong> (Media 52)
-          </div>
-          <p class="text-[var(--muted-foreground)]">
-            Recién despertado (pico natural de cortisol matutino + pensamientos del día): el estrés subió de 26 a 66.
-          </p>
-        </div>
-
-        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
-          <div class="flex justify-between items-center font-semibold">
-            <span>18 Nov · 20:01 (Tarde)</span>
-            <span class="font-mono text-[var(--warning)]">Δ +25 estrés</span>
-          </div>
-          <div class="font-mono text-xs text-[var(--muted-foreground)]">
-            15,0 min · 70 ppm · 14,7 rpm
-          </div>
-          <div class="text-xs">
-            Estrés: <strong>17 → 42</strong> (Media 34)
-          </div>
-          <p class="text-[var(--muted-foreground)]">
-            Mejor frecuencia cardíaca (70 ppm) y estrés medio bajo (34), aunque los últimos minutos hubo algo de activación mental.
-          </p>
-        </div>
-
+        
         <div class="p-3.5 rounded-lg bg-[var(--background)] border-2 border-[var(--success)] space-y-1.5">
           <div class="flex justify-between items-center font-semibold">
-            <span>21 Nov · 20:41 (Ayer)</span>
-            <span class="font-mono text-[var(--success)]">Δ 0 (Estable)</span>
+            <span>2026-11-21 20:41</span>
+            <span class="font-mono text-[var(--success)]">Δ 0 (Estable/Baja)</span>
           </div>
           <div class="font-mono text-xs text-[var(--muted-foreground)]">
-            10,1 min · 72 ppm · 15,8 rpm
+            10.1 min · 72 ppm · 15.8 rpm
           </div>
           <div class="text-xs">
             Estrés: <strong>32 → 32</strong> (Media 41)
           </div>
-          <p class="text-[var(--muted-foreground)]">
-            <strong>¡Tu mejor sesión!</strong> Hecha 12 min después de entrenar Fuerza: descargaste tensión física primero y la mente no rumió.
-          </p>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
+          <div class="flex justify-between items-center font-semibold">
+            <span>2026-11-18 20:01</span>
+            <span class="font-mono text-[var(--error)]">Δ +25 estrés</span>
+          </div>
+          <div class="font-mono text-xs text-[var(--muted-foreground)]">
+            15 min · 70 ppm · 14.7 rpm
+          </div>
+          <div class="text-xs">
+            Estrés: <strong>17 → 42</strong> (Media 34)
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
+          <div class="flex justify-between items-center font-semibold">
+            <span>2026-11-18 06:41</span>
+            <span class="font-mono text-[var(--error)]">Δ +40 estrés</span>
+          </div>
+          <div class="font-mono text-xs text-[var(--muted-foreground)]">
+            15 min · 75 ppm · 13.0 rpm
+          </div>
+          <div class="text-xs">
+            Estrés: <strong>26 → 66</strong> (Media 52)
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
+          <div class="flex justify-between items-center font-semibold">
+            <span>2026-11-09 20:04</span>
+            <span class="font-mono text-[var(--warning)]">Δ +5 estrés</span>
+          </div>
+          <div class="font-mono text-xs text-[var(--muted-foreground)]">
+            10 min · 81 ppm · 14.6 rpm
+          </div>
+          <div class="text-xs">
+            Estrés: <strong>72 → 77</strong> (Media 76)
+          </div>
         </div>
       </div>
 
-      <!-- Protocol Recommendation Box -->
       <div class="p-4 rounded-lg bg-[var(--background)] border border-[var(--card-border)] text-xs space-y-1.5">
-        <div class="font-bold text-sm">💡 Protocolo Personalizado de Meditación (basado en tus datos del Fenix 7)</div>
+        <div class="font-bold text-sm">💡 Protocolo Personalizado de Meditación (Fenix 7)</div>
         <p class="text-[var(--muted-foreground)]">
-          Tus datos muestran un patrón muy claro en momentos de duelo/separación: si te sientas a meditar en frío por la mañana temprano (06:41), el pico natural de cortisol matutino facilita que la mente rumie y el estrés suba (<code>26 → 66</code>). En cambio, cuando <strong>primero mueves el cuerpo 10 minutos (fuerza, movilidad o caminata) por la tarde-noche (20:00–21:00) y acto seguido meditas 10 minutos</strong> con exhalaciones largas (4 seg inhalar / 6 seg exhalar), tu frecuencia cardíaca cae a ~70 ppm, el estrés se estabiliza en 32 y entras en sueño profundo directo.
+          Mover el cuerpo 10 minutos (fuerza suave, movilidad o caminata) por la tarde-noche (20:00–21:30) y acto seguido realizar 10–15 minutos de meditación evita la rumiación mental, estabiliza el estrés (Δ ≤ 0) y maximiza el sueño profundo y REM.
         </p>
       </div>
     </div>
   </div>
 
-  <!-- ==================== TAB 4: HISTÓRICO 14 DÍAS ==================== -->
+  <!-- TAB 4: HISTORICO 14 DIAS -->
   <div id="panel-log" class="hidden space-y-6">
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-3">
       <div class="flex items-center justify-between pb-2 border-b border-[var(--card-border)]">
         <div>
-          <h2 class="text-base font-bold">📋 Registro Completo de Actividades (Últimos 14 Días: 9 Nov – 22 Nov)</h2>
-          <p class="text-xs text-[var(--muted-foreground)]">9 sesiones deportivas (419,5 min) + 4 sesiones de meditación (50,1 min)</p>
+          <h2 class="text-base font-bold">📋 Registro Completo de Actividades (Últimos 14 Días)</h2>
+          <p class="text-xs text-[var(--muted-foreground)]">9 sesiones deportivas + 4 sesiones de meditación</p>
         </div>
       </div>
 
@@ -556,129 +459,142 @@
               <th class="py-2 pr-3">Actividad</th>
               <th class="py-2 pr-3">Categoría</th>
               <th class="py-2 pr-3">Duración</th>
-              <th class="py-2 pr-3">Dist / Desnivel</th>
+              <th class="py-2 pr-3">Dist / Desnivel / Resp</th>
               <th class="py-2 pr-3">FC Media / Máx</th>
               <th class="py-2 pr-3">Carga / Impacto</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-[var(--card-border)] font-mono">
-            <tr>
-              <td class="py-2 pr-3">21 Nov · 20:41</td>
-              <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
-              <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
-              <td class="py-2 pr-3">10,1 min</td>
-              <td class="py-2 pr-3">15,8 rpm resp</td>
-              <td class="py-2 pr-3">72 / 79 ppm</td>
-              <td class="py-2 pr-3">Estrés: 32 → 32 (Δ 0)</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">21 Nov · 20:19</td>
-              <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
-              <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
-              <td class="py-2 pr-3">9,4 min</td>
-              <td class="py-2 pr-3">50 kcal</td>
-              <td class="py-2 pr-3">107 / 150 ppm</td>
-              <td class="py-2 pr-3">Load 3,4 · Aer 0,3</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">18 Nov · 20:01</td>
-              <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
-              <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
-              <td class="py-2 pr-3">15,0 min</td>
-              <td class="py-2 pr-3">14,7 rpm resp</td>
-              <td class="py-2 pr-3">70 / 80 ppm</td>
-              <td class="py-2 pr-3">Estrés: 17 → 42 (Δ +25)</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">18 Nov · 06:41</td>
-              <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
-              <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
-              <td class="py-2 pr-3">15,0 min</td>
-              <td class="py-2 pr-3">13,0 rpm resp</td>
-              <td class="py-2 pr-3">75 / 88 ppm</td>
-              <td class="py-2 pr-3">Estrés: 26 → 66 (Δ +40)</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">17 Nov · 20:33</td>
-              <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
-              <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
-              <td class="py-2 pr-3">7,6 min</td>
-              <td class="py-2 pr-3">47 kcal</td>
-              <td class="py-2 pr-3">113 / 152 ppm</td>
-              <td class="py-2 pr-3">Load 5,6 · Aer 0,4</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">16 Nov · 17:49</td>
-              <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
-              <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
-              <td class="py-2 pr-3">18,6 min</td>
-              <td class="py-2 pr-3">77 kcal</td>
-              <td class="py-2 pr-3">98 / 138 ppm</td>
-              <td class="py-2 pr-3">Load 10,2 · Base Aer</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">14 Nov · 17:45</td>
-              <td class="py-2 pr-3 font-sans font-semibold">🥾 Huétor de Santillán Senderismo</td>
-              <td class="py-2 pr-3 text-[var(--warning)]">TEIDE / MONTAÑA</td>
-              <td class="py-2 pr-3">120,3 min</td>
-              <td class="py-2 pr-3">7,08 km · +197 m</td>
-              <td class="py-2 pr-3">97 / 134 ppm</td>
-              <td class="py-2 pr-3">Load 6,2 · Recuperación</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">14 Nov · 10:10</td>
-              <td class="py-2 pr-3 font-sans font-semibold">🧗‍♂️ Escalada</td>
-              <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
-              <td class="py-2 pr-3">71,6 min</td>
-              <td class="py-2 pr-3">409 kcal · +4 m</td>
-              <td class="py-2 pr-3">120 / 169 ppm</td>
-              <td class="py-2 pr-3">Load 44,2 · Aer 2,1 / Ana 1,9</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">13 Nov · 17:26</td>
-              <td class="py-2 pr-3 font-sans font-semibold">🥾 Beas de Granada Senderismo</td>
-              <td class="py-2 pr-3 text-[var(--warning)]">TEIDE / MONTAÑA</td>
-              <td class="py-2 pr-3">79,8 min</td>
-              <td class="py-2 pr-3">3,77 km · +297 m</td>
-              <td class="py-2 pr-3">101 / 137 ppm</td>
-              <td class="py-2 pr-3">Load 10,0 · Recuperación</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">12 Nov · 18:10</td>
-              <td class="py-2 pr-3 font-sans font-semibold">🧗‍♂️ Escalada</td>
-              <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
-              <td class="py-2 pr-3">63,3 min</td>
-              <td class="py-2 pr-3">374 kcal · +4 m</td>
-              <td class="py-2 pr-3">122 / 168 ppm</td>
-              <td class="py-2 pr-3">Load 44,9 · Aer 2,1 / Ana 1,7</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">10 Nov · 19:31</td>
-              <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
-              <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
-              <td class="py-2 pr-3">14,3 min</td>
-              <td class="py-2 pr-3">57 kcal</td>
-              <td class="py-2 pr-3">97 / 136 ppm</td>
-              <td class="py-2 pr-3">Load 2,2 · Aer 0,2</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">09 Nov · 20:04</td>
-              <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
-              <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
-              <td class="py-2 pr-3">10,0 min</td>
-              <td class="py-2 pr-3">14,6 rpm resp</td>
-              <td class="py-2 pr-3">81 / 88 ppm</td>
-              <td class="py-2 pr-3">Estrés: 72 → 77 (Δ +5)</td>
-            </tr>
-            <tr>
-              <td class="py-2 pr-3">09 Nov · 19:10</td>
-              <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
-              <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
-              <td class="py-2 pr-3">34,6 min</td>
-              <td class="py-2 pr-3">140 kcal</td>
-              <td class="py-2 pr-3">99 / 150 ppm</td>
-              <td class="py-2 pr-3">Load 6,1 · Base Aer</td>
-            </tr>
+            
+        <tr>
+          <td class="py-2 pr-3">2026-11-21 20:41</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">10.1 min</td>
+          <td class="py-2 pr-3">15.8 rpm</td>
+          <td class="py-2 pr-3">72 / 79 ppm</td>
+          <td class="py-2 pr-3">Estrés: 32 → 32 (Δ 0)</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-21 20:19</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">9.4 min</td>
+          <td class="py-2 pr-3">50 kcal</td>
+          <td class="py-2 pr-3">107 / 150 ppm</td>
+          <td class="py-2 pr-3">Load 3.4 · Aer 0.3</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-18 20:01</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">15 min</td>
+          <td class="py-2 pr-3">14.7 rpm</td>
+          <td class="py-2 pr-3">70 / 80 ppm</td>
+          <td class="py-2 pr-3">Estrés: 17 → 42 (Δ 25)</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-18 06:41</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">15 min</td>
+          <td class="py-2 pr-3">13.0 rpm</td>
+          <td class="py-2 pr-3">75 / 88 ppm</td>
+          <td class="py-2 pr-3">Estrés: 26 → 66 (Δ 40)</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-17 20:33</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">7.6 min</td>
+          <td class="py-2 pr-3">47 kcal</td>
+          <td class="py-2 pr-3">113 / 152 ppm</td>
+          <td class="py-2 pr-3">Load 5.6 · Aer 0.4</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-16 17:49</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">18.6 min</td>
+          <td class="py-2 pr-3">77 kcal</td>
+          <td class="py-2 pr-3">98 / 138 ppm</td>
+          <td class="py-2 pr-3">Load 10.2 · Aer 0.7</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-14 17:45</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🥾 Huétor de Santillán Senderismo</td>
+          <td class="py-2 pr-3 text-[var(--warning)]">TEIDE / MONTAÑA</td>
+          <td class="py-2 pr-3">120.3 min</td>
+          <td class="py-2 pr-3">7.08 km · +197 m</td>
+          <td class="py-2 pr-3">97 / 134 ppm</td>
+          <td class="py-2 pr-3">Load 6.2 · Aer 0.5</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-14 10:10</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧗‍♂️ Escalada</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">71.6 min</td>
+          <td class="py-2 pr-3">0.07 km · +4 m</td>
+          <td class="py-2 pr-3">120 / 169 ppm</td>
+          <td class="py-2 pr-3">Load 44.2 · Aer 2.1</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-13 17:26</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🥾 Beas de Granada Senderismo</td>
+          <td class="py-2 pr-3 text-[var(--warning)]">TEIDE / MONTAÑA</td>
+          <td class="py-2 pr-3">79.8 min</td>
+          <td class="py-2 pr-3">3.77 km · +297 m</td>
+          <td class="py-2 pr-3">101 / 137 ppm</td>
+          <td class="py-2 pr-3">Load 10.0 · Aer 1.0</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-12 18:10</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧗‍♂️ Escalada</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">63.3 min</td>
+          <td class="py-2 pr-3">0.06 km</td>
+          <td class="py-2 pr-3">122 / 168 ppm</td>
+          <td class="py-2 pr-3">Load 44.9 · Aer 2.1</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-10 19:31</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">14.3 min</td>
+          <td class="py-2 pr-3">57 kcal</td>
+          <td class="py-2 pr-3">97 / 136 ppm</td>
+          <td class="py-2 pr-3">Load 2.2 · Aer 0.2</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-09 20:04</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">10 min</td>
+          <td class="py-2 pr-3">14.6 rpm</td>
+          <td class="py-2 pr-3">81 / 88 ppm</td>
+          <td class="py-2 pr-3">Estrés: 72 → 77 (Δ 5)</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-09 19:10</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">34.6 min</td>
+          <td class="py-2 pr-3">140 kcal</td>
+          <td class="py-2 pr-3">99 / 150 ppm</td>
+          <td class="py-2 pr-3">Load 6.1 · Aer 0.6</td>
+        </tr>
           </tbody>
         </table>
       </div>
@@ -699,22 +615,10 @@
           btn.className = 'px-3 py-1.5 rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
         }
       });
-      if (active === 'teide') {
-        drawTeideChart();
-      }
+      if (active === 'teide') drawTeideChart();
     }
 
-    const sessions = [
-      { label: '9N Fuerza', duration: 34.6, load: 6.1 },
-      { label: '10N Fuerza', duration: 14.3, load: 2.2 },
-      { label: '12N Escalada', duration: 63.3, load: 44.9 },
-      { label: '13N Beas (+297m)', duration: 79.8, load: 10.0 },
-      { label: '14N Escalada', duration: 71.6, load: 44.2 },
-      { label: '14N Huétor (+197m)', duration: 120.3, load: 6.2 },
-      { label: '16N Fuerza', duration: 18.6, load: 10.2 },
-      { label: '17N Fuerza', duration: 7.6, load: 5.6 },
-      { label: '21N Fuerza', duration: 9.4, load: 3.4 },
-    ];
+    const sessions = [{"label":"09/11 Fuerza","duration":34.6,"load":6.1},{"label":"10/11 Fuerza","duration":14.3,"load":2.2},{"label":"12/11 Escalada","duration":63.3,"load":44.9},{"label":"13/11 Beas de Gr","duration":79.8,"load":10},{"label":"14/11 Escalada","duration":71.6,"load":44.2},{"label":"14/11 Huétor de ","duration":120.3,"load":6.2},{"label":"16/11 Fuerza","duration":18.6,"load":10.2},{"label":"17/11 Fuerza","duration":7.6,"load":5.6},{"label":"21/11 Fuerza","duration":9.4,"load":3.4}];
 
     function drawTeideChart() {
       const canvas = document.getElementById('teideChart');
@@ -737,13 +641,10 @@
 
       ctx.clearRect(0, 0, rect.width, 190);
 
-      const padLeft = 36;
-      const padRight = 16;
-      const padTop = 20;
-      const padBottom = 38;
+      const padLeft = 36, padRight = 16, padTop = 20, padBottom = 38;
       const chartW = rect.width - padLeft - padRight;
       const chartH = 190 - padTop - padBottom;
-      const maxVal = 130;
+      const maxVal = Math.max(130, ...sessions.map((s) => Math.max(s.duration, s.load)));
 
       ctx.strokeStyle = border;
       ctx.lineWidth = 1;
@@ -753,32 +654,25 @@
         ctx.moveTo(padLeft, y);
         ctx.lineTo(padLeft + chartW, y);
         ctx.stroke();
-
         ctx.fillStyle = muted;
         ctx.font = '10px monospace';
         ctx.textAlign = 'right';
         ctx.fillText(String(val), padLeft - 6, y + 3);
       });
 
-      const slotW = chartW / sessions.length;
+      const slotW = chartW / Math.max(1, sessions.length);
       const barW = Math.min(22, slotW * 0.34);
 
       sessions.forEach((s, idx) => {
         const centerX = padLeft + idx * slotW + slotW / 2;
-
-        // Duration bar
         const durH = (s.duration / maxVal) * chartH;
-        const durY = padTop + chartH - durH;
         ctx.fillStyle = primary;
-        ctx.fillRect(centerX - barW - 2, durY, barW, durH);
+        ctx.fillRect(centerX - barW - 2, padTop + chartH - durH, barW, durH);
 
-        // Load bar
         const loadH = (s.load / maxVal) * chartH;
-        const loadY = padTop + chartH - loadH;
         ctx.fillStyle = success;
-        ctx.fillRect(centerX + 2, loadY, barW, loadH);
+        ctx.fillRect(centerX + 2, padTop + chartH - loadH, barW, loadH);
 
-        // Label
         ctx.fillStyle = fg;
         ctx.font = '10px sans-serif';
         ctx.textAlign = 'center';

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garmin Fenix 7 Studio — Teide 0-4-0 & Calma</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script>
+    if (!getComputedStyle(document.documentElement).getPropertyValue('--background').trim()) {
+      const s = document.documentElement.style;
+      s.setProperty('--background', '#0f172a');
+      s.setProperty('--card', '#1e293b');
+      s.setProperty('--border', '#334155');
+      s.setProperty('--card-border', '#334155');
+      s.setProperty('--foreground', '#f8fafc');
+      s.setProperty('--muted-foreground', '#94a3b8');
+      s.setProperty('--primary', '#3b82f6');
+      s.setProperty('--primary-foreground', '#ffffff');
+      s.setProperty('--success', '#22c55e');
+      s.setProperty('--warning', '#f59e0b');
+      s.setProperty('--error', '#ef4444');
+    }
+  </script>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 md:p-6 m-0 space-y-6">
+
+  <header class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div class="space-y-1">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 text-xs font-semibold rounded-md bg-[var(--primary)] text-[var(--primary-foreground)]">
+          GARMIN FENIX 7 STUDIO
+        </span>
+        <span class="text-xs text-[var(--muted-foreground)] font-mono">
+          Actualizado: 2026-11-22 · Informe Matutino Automático
+        </span>
+      </div>
+      <h1 class="text-lg md:text-xl font-bold tracking-tight">
+        Panel Diario: Reto Teide 0-4-0 (7 Mar) &amp; Calma / Sistema Nervioso
+      </h1>
+      <p class="text-xs text-[var(--muted-foreground)]">
+        Cierre completo de ayer (2026-11-21) + Recuperación nocturna de hoy (2026-11-22)
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-1.5 bg-[var(--background)] p-1 rounded-lg border border-[var(--card-border)] text-xs">
+      <button onclick="switchTab('overview')" id="tab-overview" class="px-3 py-1.5 rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)] transition">
+        Resumen Matutino IA
+      </button>
+      <button onclick="switchTab('teide')" id="tab-teide" class="px-3 py-1.5 rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
+        Reto Teide (7 Mar)
+      </button>
+      <button onclick="switchTab('calm')" id="tab-calm" class="px-3 py-1.5 rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
+        Meditación &amp; VFC
+      </button>
+      <button onclick="switchTab('log')" id="tab-log" class="px-3 py-1.5 rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
+        Histórico 14 Días
+      </button>
+    </div>
+  </header>
+
+  <section class="grid grid-cols-2 lg:grid-cols-5 gap-3">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5">
+      <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+        <span>Body Battery (Hoy)</span>
+        <span class="font-mono text-[var(--success)] font-semibold">+95 noche</span>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-2xl font-bold font-mono tabular-nums">100</span>
+        <span class="text-xs text-[var(--muted-foreground)]">/ 100 (Actual: 93)</span>
+      </div>
+      <div class="w-full h-1.5 bg-[var(--background)] rounded-full overflow-hidden">
+        <div class="h-full bg-[var(--success)] rounded-full" style="width: 100%"></div>
+      </div>
+      <p class="text-xs text-[var(--muted-foreground)]">
+        Ayer: máx 18 → mín 5
+      </p>
+    </div>
+
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5">
+      <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+        <span>Sueño de Anoche</span>
+        <span class="font-mono text-[var(--success)] font-semibold">Score: 100</span>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-2xl font-bold font-mono tabular-nums">9h 11m</span>
+        <span class="text-xs text-[var(--muted-foreground)]">vs 3h 09m ant.</span>
+      </div>
+      <div class="flex gap-1 text-xs text-[var(--muted-foreground)] font-mono">
+        <span>Prof: 2h 13m</span> · <span>REM: 2h 27m</span>
+      </div>
+      <p class="text-xs text-[var(--success)]">
+        🟢 Meta > 75 superada
+      </p>
+    </div>
+
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5">
+      <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+        <span>VFC (HRV) &amp; FC Reposo</span>
+        <span class="font-mono text-[var(--success)] font-semibold">BALANCED</span>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-2xl font-bold font-mono tabular-nums">87 ms</span>
+        <span class="text-xs text-[var(--muted-foreground)]">49 ppm RHR</span>
+      </div>
+      <p class="text-xs text-[var(--muted-foreground)]">
+        Ayer: 38 ms · Media 7d: 72 ms
+      </p>
+      <p class="text-xs text-[var(--success)]">
+        Variación RHR: -7 ppm
+      </p>
+    </div>
+
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5">
+      <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+        <span>Meditación &amp; Estrés (Ayer)</span>
+        <span class="font-mono text-[var(--warning)] font-semibold">Estrés: 43</span>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-2xl font-bold font-mono tabular-nums">10.1 min</span>
+        <span class="text-xs text-[var(--muted-foreground)]">3d / 14d</span>
+      </div>
+      <p class="text-xs text-[var(--muted-foreground)]">
+        Última: 32 → 32 (Δ 0)
+      </p>
+      <p class="text-xs text-[var(--success)]">
+        Meta: 5–7 días/semana (10–15m)
+      </p>
+    </div>
+
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-3.5 space-y-1.5 col-span-2 lg:col-span-1">
+      <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+        <span>Reto Teide 0-4-0</span>
+        <span class="font-mono text-[var(--primary)] font-semibold">Faltan 105 días</span>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-2xl font-bold font-mono tabular-nums">16.131</span>
+        <span class="text-xs text-[var(--muted-foreground)]">pasos ayer (+32 pisos)</span>
+      </div>
+      <p class="text-xs text-[var(--muted-foreground)]">
+        Ayer: 2485 kcal (560 act)
+      </p>
+      <p class="text-xs text-[var(--warning)]">
+        Desnivel 14d: +498 m
+      </p>
+    </div>
+  </section>
+
+  <!-- TAB 1: OVERVIEW -->
+  <div id="panel-overview" class="space-y-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-[var(--card-border)]">
+        <div>
+          <h2 class="text-base font-bold">
+            🧠 Interpretación Matutina del Coach IA (Balance de Ayer + Sueño de Hoy)
+          </h2>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            Evaluación cruzada de tus actividades del 2026-11-21 y cómo las ha asimilado tu cuerpo esta noche (2026-11-22)
+          </p>
+        </div>
+        <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--background)] border border-[var(--card-border)]">
+          Estado Hoy: 🟢 Óptimo para Montaña / Zona 2 o Fuerza
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs leading-relaxed">
+        <div class="bg-[var(--background)] border border-[var(--card-border)] rounded-lg p-3.5 space-y-2">
+          <div class="font-semibold text-sm flex items-center justify-between">
+            <span>1. El Día de Ayer (2026-11-21)</span>
+            <span class="font-mono text-xs text-[var(--primary)]">16.131 pasos</span>
+          </div>
+          <p class="text-[var(--muted-foreground)]">
+            <strong>Deporte:</strong> Fuerza (9.4 min, FC media 107 ppm). Acumulaste <strong>16.131 pasos</strong> y <strong>32 pisos</strong> subidos (560 kcal activas / 2485 kcal totales).
+          </p>
+          <p class="text-[var(--muted-foreground)]">
+            <strong>Meditación y Calma:</strong> 10.1 min a 72 ppm (estrés 32 → 32, Δ 0). El estrés medio del día cerró en <strong>43/100</strong> con una Body Battery que osciló entre 18 y 5.
+          </p>
+        </div>
+
+        <div class="bg-[var(--background)] border border-[var(--card-border)] rounded-lg p-3.5 space-y-2">
+          <div class="font-semibold text-sm flex items-center justify-between">
+            <span>2. Respuesta Nocturna (2026-11-22)</span>
+            <span class="font-mono text-xs text-[var(--success)]">Score 100</span>
+          </div>
+          <p class="text-[var(--muted-foreground)]">
+            Has dormido <strong>9h 11m</strong> (Puntuación: <strong>100/100</strong>), con <strong>2h 13m</strong> de sueño profundo y <strong>2h 27m</strong> de sueño REM.
+          </p>
+          <p class="text-[var(--muted-foreground)]">
+            Tu <strong>VFC (HRV)</strong> nocturna ha marcado <strong>87 ms</strong> (media semanal: 72 ms) y tu frecuencia cardíaca en reposo está en <strong>49 ppm</strong>, recargando tu Body Battery en <strong>+95 puntos</strong> hasta <strong>100</strong>.
+          </p>
+        </div>
+
+        <div class="bg-[var(--background)] border border-[var(--card-border)] rounded-lg p-3.5 space-y-2">
+          <div class="font-semibold text-sm flex items-center justify-between">
+            <span>3. Plan Recomendado para Hoy</span>
+            <span class="font-mono text-xs text-[var(--primary)]">Faltan 105d Teide</span>
+          </div>
+          <ul class="space-y-1.5 text-[var(--muted-foreground)] list-disc pl-4">
+            <li>
+              <strong>Objetivo Teide (7 Mar):</strong> Con tu nivel alto de energía hoy, es un día excelente para sumar desnivel en Zona 2 (105–135 ppm) o realizar sesión de Fuerza/Escalada.
+            </li>
+            <li>
+              <strong>Objetivo Calma:</strong> Reserva <strong>10–15 minutos entre las 20:00 y las 21:30</strong> (idealmente tras soltar tensión física) para tu sesión diaria de meditación.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-bold">Distribución del Estrés y Descanso (Ayer 2026-11-21)</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">Tiempo en cada zona fisiológica del Fenix 7</p>
+          </div>
+          <span class="text-xs font-mono font-semibold">Media: 43 / 100</span>
+        </div>
+
+        <div class="space-y-2.5 pt-1 text-xs">
+          <div>
+            <div class="flex justify-between mb-1">
+              <span>Descanso / Recuperación (&lt; 25)</span>
+              <span class="font-mono">283 min (25.4%)</span>
+            </div>
+            <div class="w-full h-2.5 bg-[var(--background)] rounded-full overflow-hidden">
+              <div class="h-full rounded-full" style="width: 25.4%; background: var(--success)"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1">
+              <span>Estrés Bajo (26 – 50)</span>
+              <span class="font-mono">418 min (37.6%)</span>
+            </div>
+            <div class="w-full h-2.5 bg-[var(--background)] rounded-full overflow-hidden">
+              <div class="h-full rounded-full" style="width: 37.6%; background: var(--primary)"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1">
+              <span>Estrés Medio (51 – 75)</span>
+              <span class="font-mono">320 min (28.8%)</span>
+            </div>
+            <div class="w-full h-2.5 bg-[var(--background)] rounded-full overflow-hidden">
+              <div class="h-full rounded-full" style="width: 28.8%; background: var(--warning)"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1">
+              <span>Estrés Alto (76 – 100)</span>
+              <span class="font-mono">91 min (8.2%)</span>
+            </div>
+            <div class="w-full h-2.5 bg-[var(--background)] rounded-full overflow-hidden">
+              <div class="h-full rounded-full" style="width: 8.2%; background: var(--error)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-bold">Comparativa de Sueño y Recuperación Autonómica</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">Noche anterior (2026-11-21) vs Anoche (2026-11-22)</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-1 text-xs">
+          <div class="p-3 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
+            <div class="flex items-center justify-between font-semibold text-[var(--muted-foreground)]">
+              <span>Noche 2026-11-21</span>
+              <span class="font-mono">Score 25</span>
+            </div>
+            <div class="space-y-1 font-mono text-xs">
+              <div class="flex justify-between"><span>Tiempo total:</span><strong>3h 09m</strong></div>
+              <div class="flex justify-between"><span>Sueño Profundo:</span><span>48 min</span></div>
+              <div class="flex justify-between"><span>Sueño REM:</span><span>0 min</span></div>
+              <div class="flex justify-between"><span>Despierto:</span><span>96 min</span></div>
+              <div class="flex justify-between"><span>VFC Nocturna:</span><span>38 ms</span></div>
+              <div class="flex justify-between"><span>Recarga Battery:</span><span>+13 pts</span></div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
+            <div class="flex items-center justify-between font-semibold">
+              <span>Anoche (2026-11-22)</span>
+              <span class="text-[var(--success)] font-mono">Score 100</span>
+            </div>
+            <div class="space-y-1 font-mono text-xs">
+              <div class="flex justify-between"><span>Tiempo total:</span><strong class="text-[var(--success)]">9h 11m</strong></div>
+              <div class="flex justify-between"><span>Sueño Profundo:</span><span>133 min</span></div>
+              <div class="flex justify-between"><span>Sueño REM:</span><span>147 min</span></div>
+              <div class="flex justify-between"><span>Despierto:</span><span>1 min</span></div>
+              <div class="flex justify-between"><span>VFC Nocturna:</span><span class="text-[var(--success)]">87 ms</span></div>
+              <div class="flex justify-between"><span>Recarga Battery:</span><span class="text-[var(--success)]">+95 pts</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: TEIDE -->
+  <div id="panel-teide" class="hidden space-y-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-[var(--card-border)]">
+        <div>
+          <h2 class="text-base font-bold">🏔️ Hoja de Ruta Teide 0-4-0 (Nivel del Mar → Refugio · 7 de Marzo)</h2>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            Salida 02:00 AM · Meta: +3.300 m a +3.700 m de desnivel positivo · Faltan 105 días
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
+          <div class="flex justify-between font-semibold">
+            <span>Desnivel Acumulado (Últimos 14 días)</span>
+            <span class="font-mono">+498 m</span>
+          </div>
+          <div class="w-full h-2.5 bg-[var(--card)] rounded-full overflow-hidden">
+            <div class="h-full bg-[var(--warning)] rounded-full" style="width: 42%"></div>
+          </div>
+          <p class="text-[var(--muted-foreground)]">
+            Salidas de montaña/senderismo en 14 días: <strong>4 sesiones</strong>. Meta Fase 1 (Nov–Dic): 500–900 m semanales en Zona 2.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
+          <div class="flex justify-between font-semibold">
+            <span>Fuerza + Escalada (14 días)</span>
+            <span class="font-mono text-[var(--success)]">7 sesiones</span>
+          </div>
+          <div class="w-full h-2.5 bg-[var(--card)] rounded-full overflow-hidden">
+            <div class="h-full bg-[var(--success)] rounded-full" style="width: 100%"></div>
+          </div>
+          <p class="text-[var(--muted-foreground)]">
+            Blindaje muscular y articular para soportar horas de subida y bajada con mochila.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-2">
+          <div class="flex justify-between font-semibold">
+            <span>Tiempo Deportivo Total (14 días)</span>
+            <span class="font-mono">6h 60m</span>
+          </div>
+          <div class="w-full h-2.5 bg-[var(--card)] rounded-full overflow-hidden">
+            <div class="h-full bg-[var(--primary)] rounded-full" style="width: 80%"></div>
+          </div>
+          <p class="text-[var(--muted-foreground)]">
+            9 entrenamientos registrados y 10.98 km acumulados.
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-2 space-y-2">
+        <div class="flex items-center justify-between text-xs">
+          <span class="font-semibold">Duración (min) y Training Load por Sesión Deportiva (Últimos 14 días)</span>
+          <span class="text-[var(--muted-foreground)]">Azul: Duración (min) · Verde: Training Load</span>
+        </div>
+        <div class="w-full bg-[var(--background)] border border-[var(--card-border)] rounded-lg p-3">
+          <canvas id="teideChart" height="190" class="w-full"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: MEDITACION & VFC -->
+  <div id="panel-calm" class="hidden space-y-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-[var(--card-border)]">
+        <div>
+          <h2 class="text-base font-bold">🧘‍♂️ Laboratorio de Meditación, Calma y Regulación Emocional</h2>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            4 sesiones (50.1 min) en los últimos 14 días
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+        
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border-2 border-[var(--success)] space-y-1.5">
+          <div class="flex justify-between items-center font-semibold">
+            <span>2026-11-21 20:41</span>
+            <span class="font-mono text-[var(--success)]">Δ 0 (Estable/Baja)</span>
+          </div>
+          <div class="font-mono text-xs text-[var(--muted-foreground)]">
+            10.1 min · 72 ppm · 15.8 rpm
+          </div>
+          <div class="text-xs">
+            Estrés: <strong>32 → 32</strong> (Media 41)
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
+          <div class="flex justify-between items-center font-semibold">
+            <span>2026-11-18 20:01</span>
+            <span class="font-mono text-[var(--error)]">Δ +25 estrés</span>
+          </div>
+          <div class="font-mono text-xs text-[var(--muted-foreground)]">
+            15 min · 70 ppm · 14.7 rpm
+          </div>
+          <div class="text-xs">
+            Estrés: <strong>17 → 42</strong> (Media 34)
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
+          <div class="flex justify-between items-center font-semibold">
+            <span>2026-11-18 06:41</span>
+            <span class="font-mono text-[var(--error)]">Δ +40 estrés</span>
+          </div>
+          <div class="font-mono text-xs text-[var(--muted-foreground)]">
+            15 min · 75 ppm · 13.0 rpm
+          </div>
+          <div class="text-xs">
+            Estrés: <strong>26 → 66</strong> (Media 52)
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border border-[var(--card-border)] space-y-1.5">
+          <div class="flex justify-between items-center font-semibold">
+            <span>2026-11-09 20:04</span>
+            <span class="font-mono text-[var(--warning)]">Δ +5 estrés</span>
+          </div>
+          <div class="font-mono text-xs text-[var(--muted-foreground)]">
+            10 min · 81 ppm · 14.6 rpm
+          </div>
+          <div class="text-xs">
+            Estrés: <strong>72 → 77</strong> (Media 76)
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-lg bg-[var(--background)] border border-[var(--card-border)] text-xs space-y-1.5">
+        <div class="font-bold text-sm">💡 Protocolo Personalizado de Meditación (Fenix 7)</div>
+        <p class="text-[var(--muted-foreground)]">
+          Mover el cuerpo 10 minutos (fuerza suave, movilidad o caminata) por la tarde-noche (20:00–21:30) y acto seguido realizar 10–15 minutos de meditación evita la rumiación mental, estabiliza el estrés (Δ ≤ 0) y maximiza el sueño profundo y REM.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: HISTORICO 14 DIAS -->
+  <div id="panel-log" class="hidden space-y-6">
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-5 space-y-3">
+      <div class="flex items-center justify-between pb-2 border-b border-[var(--card-border)]">
+        <div>
+          <h2 class="text-base font-bold">📋 Registro Completo de Actividades (Últimos 14 Días)</h2>
+          <p class="text-xs text-[var(--muted-foreground)]">9 sesiones deportivas + 4 sesiones de meditación</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-[var(--card-border)] text-[var(--muted-foreground)]">
+              <th class="py-2 pr-3">Fecha y Hora</th>
+              <th class="py-2 pr-3">Actividad</th>
+              <th class="py-2 pr-3">Categoría</th>
+              <th class="py-2 pr-3">Duración</th>
+              <th class="py-2 pr-3">Dist / Desnivel / Resp</th>
+              <th class="py-2 pr-3">FC Media / Máx</th>
+              <th class="py-2 pr-3">Carga / Impacto</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--card-border)] font-mono">
+            
+        <tr>
+          <td class="py-2 pr-3">2026-11-21 20:41</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">10.1 min</td>
+          <td class="py-2 pr-3">15.8 rpm</td>
+          <td class="py-2 pr-3">72 / 79 ppm</td>
+          <td class="py-2 pr-3">Estrés: 32 → 32 (Δ 0)</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-21 20:19</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">9.4 min</td>
+          <td class="py-2 pr-3">50 kcal</td>
+          <td class="py-2 pr-3">107 / 150 ppm</td>
+          <td class="py-2 pr-3">Load 3.4 · Aer 0.3</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-18 20:01</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">15 min</td>
+          <td class="py-2 pr-3">14.7 rpm</td>
+          <td class="py-2 pr-3">70 / 80 ppm</td>
+          <td class="py-2 pr-3">Estrés: 17 → 42 (Δ 25)</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-18 06:41</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">15 min</td>
+          <td class="py-2 pr-3">13.0 rpm</td>
+          <td class="py-2 pr-3">75 / 88 ppm</td>
+          <td class="py-2 pr-3">Estrés: 26 → 66 (Δ 40)</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-17 20:33</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">7.6 min</td>
+          <td class="py-2 pr-3">47 kcal</td>
+          <td class="py-2 pr-3">113 / 152 ppm</td>
+          <td class="py-2 pr-3">Load 5.6 · Aer 0.4</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-16 17:49</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">18.6 min</td>
+          <td class="py-2 pr-3">77 kcal</td>
+          <td class="py-2 pr-3">98 / 138 ppm</td>
+          <td class="py-2 pr-3">Load 10.2 · Aer 0.7</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-14 17:45</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🥾 Huétor de Santillán Senderismo</td>
+          <td class="py-2 pr-3 text-[var(--warning)]">TEIDE / MONTAÑA</td>
+          <td class="py-2 pr-3">120.3 min</td>
+          <td class="py-2 pr-3">7.08 km · +197 m</td>
+          <td class="py-2 pr-3">97 / 134 ppm</td>
+          <td class="py-2 pr-3">Load 6.2 · Aer 0.5</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-14 10:10</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧗‍♂️ Escalada</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">71.6 min</td>
+          <td class="py-2 pr-3">0.07 km · +4 m</td>
+          <td class="py-2 pr-3">120 / 169 ppm</td>
+          <td class="py-2 pr-3">Load 44.2 · Aer 2.1</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-13 17:26</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🥾 Beas de Granada Senderismo</td>
+          <td class="py-2 pr-3 text-[var(--warning)]">TEIDE / MONTAÑA</td>
+          <td class="py-2 pr-3">79.8 min</td>
+          <td class="py-2 pr-3">3.77 km · +297 m</td>
+          <td class="py-2 pr-3">101 / 137 ppm</td>
+          <td class="py-2 pr-3">Load 10.0 · Aer 1.0</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-12 18:10</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧗‍♂️ Escalada</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">63.3 min</td>
+          <td class="py-2 pr-3">0.06 km</td>
+          <td class="py-2 pr-3">122 / 168 ppm</td>
+          <td class="py-2 pr-3">Load 44.9 · Aer 2.1</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-10 19:31</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">14.3 min</td>
+          <td class="py-2 pr-3">57 kcal</td>
+          <td class="py-2 pr-3">97 / 136 ppm</td>
+          <td class="py-2 pr-3">Load 2.2 · Aer 0.2</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-09 20:04</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">10 min</td>
+          <td class="py-2 pr-3">14.6 rpm</td>
+          <td class="py-2 pr-3">81 / 88 ppm</td>
+          <td class="py-2 pr-3">Estrés: 72 → 77 (Δ 5)</td>
+        </tr>
+
+        <tr>
+          <td class="py-2 pr-3">2026-11-09 19:10</td>
+          <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
+          <td class="py-2 pr-3 text-[var(--primary)]">DEPORTE</td>
+          <td class="py-2 pr-3">34.6 min</td>
+          <td class="py-2 pr-3">140 kcal</td>
+          <td class="py-2 pr-3">99 / 150 ppm</td>
+          <td class="py-2 pr-3">Load 6.1 · Aer 0.6</td>
+        </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabs = ['overview', 'teide', 'calm', 'log'];
+    function switchTab(active) {
+      tabs.forEach((t) => {
+        const panel = document.getElementById('panel-' + t);
+        const btn = document.getElementById('tab-' + t);
+        if (t === active) {
+          panel.classList.remove('hidden');
+          btn.className = 'px-3 py-1.5 rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)] transition';
+        } else {
+          panel.classList.add('hidden');
+          btn.className = 'px-3 py-1.5 rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
+        }
+      });
+      if (active === 'teide') drawTeideChart();
+    }
+
+    const sessions = [{"label":"09/11 Fuerza","duration":34.6,"load":6.1},{"label":"10/11 Fuerza","duration":14.3,"load":2.2},{"label":"12/11 Escalada","duration":63.3,"load":44.9},{"label":"13/11 Beas de Gr","duration":79.8,"load":10},{"label":"14/11 Escalada","duration":71.6,"load":44.2},{"label":"14/11 Huétor de ","duration":120.3,"load":6.2},{"label":"16/11 Fuerza","duration":18.6,"load":10.2},{"label":"17/11 Fuerza","duration":7.6,"load":5.6},{"label":"21/11 Fuerza","duration":9.4,"load":3.4}];
+
+    function drawTeideChart() {
+      const canvas = document.getElementById('teideChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0) return;
+
+      canvas.width = rect.width * dpr;
+      canvas.height = 190 * dpr;
+      ctx.scale(dpr, dpr);
+
+      const style = getComputedStyle(document.documentElement);
+      const fg = style.getPropertyValue('--foreground').trim() || '#e5e7eb';
+      const muted = style.getPropertyValue('--muted-foreground').trim() || '#9ca3af';
+      const primary = style.getPropertyValue('--primary').trim() || '#3b82f6';
+      const success = style.getPropertyValue('--success').trim() || '#22c55e';
+      const border = style.getPropertyValue('--card-border').trim() || 'rgba(128,128,128,0.2)';
+
+      ctx.clearRect(0, 0, rect.width, 190);
+
+      const padLeft = 36, padRight = 16, padTop = 20, padBottom = 38;
+      const chartW = rect.width - padLeft - padRight;
+      const chartH = 190 - padTop - padBottom;
+      const maxVal = Math.max(130, ...sessions.map((s) => Math.max(s.duration, s.load)));
+
+      ctx.strokeStyle = border;
+      ctx.lineWidth = 1;
+      [0, 30, 60, 90, 120].forEach((val) => {
+        const y = padTop + chartH - (val / maxVal) * chartH;
+        ctx.beginPath();
+        ctx.moveTo(padLeft, y);
+        ctx.lineTo(padLeft + chartW, y);
+        ctx.stroke();
+        ctx.fillStyle = muted;
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText(String(val), padLeft - 6, y + 3);
+      });
+
+      const slotW = chartW / Math.max(1, sessions.length);
+      const barW = Math.min(22, slotW * 0.34);
+
+      sessions.forEach((s, idx) => {
+        const centerX = padLeft + idx * slotW + slotW / 2;
+        const durH = (s.duration / maxVal) * chartH;
+        ctx.fillStyle = primary;
+        ctx.fillRect(centerX - barW - 2, padTop + chartH - durH, barW, durH);
+
+        const loadH = (s.load / maxVal) * chartH;
+        ctx.fillStyle = success;
+        ctx.fillRect(centerX + 2, padTop + chartH - loadH, barW, loadH);
+
+        ctx.fillStyle = fg;
+        ctx.font = '10px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(s.label, centerX, padTop + chartH + 18);
+      });
+    }
+
+    window.addEventListener('resize', drawTeideChart);
+    window.addEventListener('themechange', drawTeideChart);
+  </script>
+</body>
+</html>
