@@ -67,7 +67,7 @@
       </div>
       <div class="flex items-baseline gap-2">
         <span class="text-2xl font-bold font-mono tabular-nums">83</span>
-        <span class="text-xs text-[var(--muted-foreground)]">/ 100 (Actual: 81)</span>
+        <span class="text-xs text-[var(--muted-foreground)]">/ 100 (Actual: 75)</span>
       </div>
       <div class="w-full h-1.5 bg-[var(--background)] rounded-full overflow-hidden">
         <div class="h-full bg-[var(--success)] rounded-full" style="width: 83%"></div>
@@ -118,7 +118,7 @@
       </div>
       <div class="flex items-baseline gap-2">
         <span class="text-2xl font-bold font-mono tabular-nums">15 min</span>
-        <span class="text-xs text-[var(--muted-foreground)]">4d / 14d</span>
+        <span class="text-xs text-[var(--muted-foreground)]">5d / 14d</span>
       </div>
       <p class="text-xs text-[var(--muted-foreground)]">
         Última: 33 → 32 (Δ -1)
@@ -372,13 +372,26 @@
         <div>
           <h2 class="text-base font-bold">🧘‍♂️ Laboratorio de Meditación, Calma y Regulación Emocional</h2>
           <p class="text-xs text-[var(--muted-foreground)]">
-            6 sesiones (80.2 min) en los últimos 14 días
+            7 sesiones (90.2 min) en los últimos 14 días
           </p>
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
         
+        <div class="p-3.5 rounded-lg bg-[var(--background)] border-2 border-[var(--success)] space-y-1.5">
+          <div class="flex justify-between items-center font-semibold">
+            <span>2026-11-24 07:44</span>
+            <span class="font-mono text-[var(--success)]">Δ 0 (Estable/Baja)</span>
+          </div>
+          <div class="font-mono text-xs text-[var(--muted-foreground)]">
+            10 min · 94 ppm · 18.0 rpm
+          </div>
+          <div class="text-xs">
+            Estrés: <strong>87 → 87</strong> (Media 87)
+          </div>
+        </div>
+
         <div class="p-3.5 rounded-lg bg-[var(--background)] border-2 border-[var(--success)] space-y-1.5">
           <div class="flex justify-between items-center font-semibold">
             <span>2026-11-23 22:31</span>
@@ -417,19 +430,6 @@
             Estrés: <strong>39 → 52</strong> (Media 50)
           </div>
         </div>
-
-        <div class="p-3.5 rounded-lg bg-[var(--background)] border-2 border-[var(--success)] space-y-1.5">
-          <div class="flex justify-between items-center font-semibold">
-            <span>2026-11-21 20:41</span>
-            <span class="font-mono text-[var(--success)]">Δ 0 (Estable/Baja)</span>
-          </div>
-          <div class="font-mono text-xs text-[var(--muted-foreground)]">
-            10.1 min · 72 ppm · 15.8 rpm
-          </div>
-          <div class="text-xs">
-            Estrés: <strong>32 → 32</strong> (Media 41)
-          </div>
-        </div>
       </div>
 
       <div class="p-4 rounded-lg bg-[var(--background)] border border-[var(--card-border)] text-xs space-y-1.5">
@@ -447,7 +447,7 @@
       <div class="flex items-center justify-between pb-2 border-b border-[var(--card-border)]">
         <div>
           <h2 class="text-base font-bold">📋 Registro Completo de Actividades (Últimos 14 Días)</h2>
-          <p class="text-xs text-[var(--muted-foreground)]">9 sesiones deportivas + 6 sesiones de meditación</p>
+          <p class="text-xs text-[var(--muted-foreground)]">9 sesiones deportivas + 7 sesiones de meditación</p>
         </div>
       </div>
 
@@ -466,6 +466,16 @@
           </thead>
           <tbody class="divide-y divide-[var(--card-border)] font-mono">
             
+        <tr>
+          <td class="py-2 pr-3">2026-11-24 07:44</td>
+          <td class="py-2 pr-3 font-sans font-semibold">🧘‍♂️ Meditación</td>
+          <td class="py-2 pr-3 text-[var(--success)]">CALMA</td>
+          <td class="py-2 pr-3">10 min</td>
+          <td class="py-2 pr-3">18.0 rpm</td>
+          <td class="py-2 pr-3">94 / 104 ppm</td>
+          <td class="py-2 pr-3">Estrés: 87 → 87 (Δ 0)</td>
+        </tr>
+
         <tr>
           <td class="py-2 pr-3">2026-11-24 07:07</td>
           <td class="py-2 pr-3 font-sans font-semibold">💪 Fuerza</td>
